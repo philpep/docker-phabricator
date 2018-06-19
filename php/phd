@@ -1,0 +1,3 @@
+#!/bin/sh
+/src/phabricator/bin/phd start
+exec tail -F /var/tmp/phd/log/daemons.log

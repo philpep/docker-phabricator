@@ -1,0 +1,9 @@
+{
+  "pygments.enabled": true,
+  "storage.mysql-engine.max-size": 8388608,
+  "security.alternate-file-domain": "http://localhost:8080/",
+  "phabricator.base-uri": "http://localhost:8080/",
+  "mysql.host": "mysql",
+  "mysql.user": "root",
+  "mysql.pass": "notsosecret"
+}

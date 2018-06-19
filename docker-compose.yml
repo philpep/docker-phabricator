@@ -1,0 +1,56 @@
+version: '2'
+services:
+  php:
+    build:
+      context: php
+      args:
+        UID: 1000
+        GID: 1000
+    restart: always
+    volumes:
+      - ./src:/src:z
+      - ./data/repo:/var/repo:z
+      - ./etc/www.conf:/etc/php7/php-fpm.d/www.conf:z
+      - ./etc/local.json:/src/phabricator/conf/local/local.json:z
+    networks:
+      - phabricator
+  phd:
+    build:
+      context: php
+      args:
+        UID: 1000
+        GID: 1000
+    restart: always
+    volumes:
+      - ./src:/src:z
+      - ./data/repo:/var/repo:z
+      - ./etc/www.conf:/etc/php7/php-fpm.d/www.conf:z
+      - ./etc/local.json:/src/phabricator/conf/local/local.json:z
+    command: ["/usr/local/bin/phd"]
+    networks:
+      - phabricator
+  mysql:
+    build:
+      context: mysql
+      args:
+        UID: 1000
+        GID: 1000
+    restart: always
+    volumes:
+      - ./data/mysql:/var/lib/mysql:z
+      - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf:z
+    networks:
+      - phabricator
+  nginx:
+    build: nginx
+    restart: always
+    volumes:
+      - ./etc/nginx.conf:/etc/nginx/conf.d/default.conf:z
+      - ./src:/src:z
+    networks:
+      - phabricator
+    ports:
+      - 8080:8080
+networks:
+  phabricator:
+    external: false
