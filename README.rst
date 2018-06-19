@@ -29,11 +29,14 @@ Quick start
     # then build docker images
     docker-compose build
 
-    # then run phabricator
-    docker-compose up
+    # then start php and mysql containers
+    docker-compose up -d php mysql
 
     # then initialize the database
     ./bin/storage upgrade
+
+    # then start nginx and phd (phabricator daemons)
+    docker-compose up -d
 
     # your phabricator instance is now running on port 8080 and you can point
     # your ssl/reverse proxy on it.
