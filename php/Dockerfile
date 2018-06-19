@@ -27,6 +27,7 @@ RUN apk add --no-cache \
     php7-fileinfo \
     php7-pcntl \
     php7-posix \
+    php7-ldap \
     php7-fpm \
     php7
 RUN apk add --no-cache py2-pip && \
