@@ -1,3 +1,5 @@
 #!/bin/sh
+f=/var/tmp/phd/log/daemons.log
 /src/phabricator/bin/phd start
-exec tail -F /var/tmp/phd/log/daemons.log
+touch $f
+exec tail -F $f
