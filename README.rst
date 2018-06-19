@@ -35,4 +35,5 @@ Quick start
     # then initialize the database
     ./bin/storage upgrade
 
-    # then enjoy your phabricator instance !
+    # your phabricator instance is now running on port 8080 and you can point
+    # your ssl/reverse proxy on it.
