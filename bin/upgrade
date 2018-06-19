@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+git -C src/arcanist pull
+git -C src/libphutil pull
+git -C src/phabricator pull
+docker-compose stop phd nginx
+./bin/storage upgrade --force
+docker-compose up -d

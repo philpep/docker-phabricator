@@ -42,6 +42,15 @@ Quick start
     # your ssl/reverse proxy on it.
 
 
+Upgrades
+========
+
+::
+
+    # This will pull repositories, stop, upgrade database and start phabricator
+    ./bin/upgrade
+
+
 .. _docker: https://www.docker.com/
 .. _docker-compose: https://docs.docker.com/compose/
 .. _phabricator: https://www.phacility.com/
