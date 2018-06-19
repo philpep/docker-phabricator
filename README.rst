@@ -37,3 +37,8 @@ Quick start
 
     # your phabricator instance is now running on port 8080 and you can point
     # your ssl/reverse proxy on it.
+
+
+.. _docker: https://www.docker.com/
+.. _docker-compose: https://docs.docker.com/compose/
+.. _phabricator: https://www.phacility.com/
