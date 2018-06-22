@@ -1,8 +1,9 @@
 #!/bin/sh
 set -e
+bindir=$(dirname $0)
 git -C src/arcanist pull
 git -C src/libphutil pull
 git -C src/phabricator pull
 docker-compose stop phd nginx
-./bin/storage upgrade --force
+$bindir/storage upgrade --force
 docker-compose up -d
