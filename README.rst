@@ -19,9 +19,9 @@ Quick start
     git clone -b stable https://github.com/phacility/arcanist src/arcanist
     git clone -b stable https://github.com/phacility/libphutil src/libphutil
 
-    # edit docker-compose.yml and change UID / GID to your own user and group id
+    # edit the .env file and change UID / GID to your own user and group id
     # (this is required to have docker processes running with your uid/gid)
-    edit docker-compose.yaml
+    edit .env
 
     # edit etc/local.json and set phabricator.base-uri security.alternate-file-domain as appropriate
     edit etc/local.json

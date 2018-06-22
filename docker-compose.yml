@@ -4,8 +4,8 @@ services:
     build:
       context: php
       args:
-        UID: 1000
-        GID: 1000
+        UID: ${UID}
+        GID: ${GID}
     restart: always
     volumes:
       - ./src:/src:z
@@ -18,8 +18,8 @@ services:
     build:
       context: php
       args:
-        UID: 1000
-        GID: 1000
+        UID: ${UID}
+        GID: ${GID}
     restart: always
     volumes:
       - ./src:/src:z
@@ -33,8 +33,8 @@ services:
     build:
       context: mysql
       args:
-        UID: 1000
-        GID: 1000
+        UID: ${UID}
+        GID: ${GID}
     restart: always
     volumes:
       - ./data/mysql:/var/lib/mysql:z
@@ -50,7 +50,7 @@ services:
     networks:
       - phabricator
     ports:
-      - 8080:8080
+      - ${PORT}:8080
 networks:
   phabricator:
     external: false
