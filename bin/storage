@@ -1,2 +1,1 @@
-#!/bin/sh
-exec docker-compose exec php /src/phabricator/bin/storage $*
+_phab
