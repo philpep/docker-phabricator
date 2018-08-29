@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 RUN apk add --no-cache mariadb mariadb-client
 ARG UID=1000
 ARG GID=1000
