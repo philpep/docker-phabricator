@@ -31,7 +31,7 @@ RUN apk add --no-cache \
     php7-fpm \
     php7
 RUN apk add --no-cache py2-pip && \
-    pip install --no-cache hg-evolve==8.0.1 && \
+    pip install --no-cache hg-evolve==8.1.2 && \
     apk del py2-pip
 # test that pygmentize works
 RUN pygmentize -h
