@@ -30,12 +30,8 @@ RUN apk add --no-cache \
     php7-ldap \
     php7-fpm \
     php7
-RUN apk add --no-cache py2-pip && \
-    pip install --no-cache hg-evolve==8.1.2 && \
-    apk del py2-pip
 # test that pygmentize works
 RUN pygmentize -h
-COPY hgrc /etc/mercurial/hgrc
 RUN sed -i "s@;error_log =.*@error_log = /dev/stderr@g" /etc/php7/php-fpm.conf
 ARG UID=1000
 ARG GID=1000
