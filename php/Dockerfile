@@ -3,6 +3,8 @@ RUN apk add --no-cache \
     git \
     mercurial \
     ncurses \
+    nodejs \
+    npm \
     py-pygments \
     py3-setuptools \
     php7-mcrypt \
@@ -33,14 +35,16 @@ RUN apk add --no-cache \
     php7
 # test that pygmentize works
 RUN pygmentize -h
+# Install required dependencies for aphlict
+RUN npm install ws
 RUN sed -i "s@;error_log =.*@error_log = /dev/stderr@g" /etc/php7/php-fpm.conf
 ARG UID=1000
 ARG GID=1000
 RUN addgroup -g $GID php
 RUN adduser -s /bin/ash -G php -u $UID -D -H -h /src/phabricator php
 RUN install -o php -d /src/phabricator
-COPY phd /usr/local/bin/phd
-RUN chmod +x /usr/local/bin/phd
+COPY phd aphlict /usr/local/bin/
+RUN chmod +x /usr/local/bin/phd /usr/local/bin/aphlict
 USER php
 EXPOSE 9000/tcp
 CMD ["/usr/sbin/php-fpm7", "--nodaemonize", "--force-stderr"]

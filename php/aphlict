@@ -1,0 +1,6 @@
+#!/bin/sh
+rm -rf /var/tmp/*
+f=/var/tmp/aphlict.log
+/src/phabricator/bin/aphlict start --config /etc/aphlict.json
+touch $f
+exec tail -F $f

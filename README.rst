@@ -51,6 +51,28 @@ Upgrades
     ./bin/upgrade
 
 
+aphlict (aka notification server)
+=================================
+
+You should configure `notifications.servers`::
+
+    [
+      {
+        "type": "client",
+        "host": "phab.example.com"
+        "port": 8080,
+        "protocol": "https",
+        "path": "/ws/"
+      },
+      {
+        "type": "admin",
+        "host": "aphlict",
+        "port": 22281,
+        "protocol": "http"
+      }
+    ]
+
+
 .. _docker: https://www.docker.com/
 .. _docker-compose: https://docs.docker.com/compose/
 .. _phabricator: https://www.phacility.com/
