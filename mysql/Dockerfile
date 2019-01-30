@@ -1,5 +1,5 @@
 FROM alpine:3.8
-RUN apk add --no-cache mariadb mariadb-client
+RUN apk add --no-cache mariadb mariadb-client mariadb-server-utils
 ARG UID=1000
 ARG GID=1000
 RUN sed -i "s@^mysql.*@mysql:x:$UID:$GID:mysql:/var/lib/mysql:/sbin/nologin@" /etc/passwd
