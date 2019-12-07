@@ -3,7 +3,7 @@
   "storage.mysql-engine.max-size": 8388608,
   "security.alternate-file-domain": "https://phab.example.com",
   "phabricator.base-uri": "https://phab.example.com",
-  "mysql.host": "mysql",
-  "mysql.user": "root",
-  "mysql.pass": "notsosecret"
+  "mysql.host": "db",
+  "mysql.user": "phab_user",
+  "mysql.pass": "phab_pwd"
 }
