@@ -1,38 +1,23 @@
 version: '2'
 services:
-  php:
-    build:
-      context: php
+  db:
+    build: 
+      context: mysql
       args:
         UID: ${UID}
         GID: ${GID}
+        PHAB_USER: ${PHAB_USER}
+        PHAB_PWD: ${PHAB_PWD}
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
     volumes:
-      - ./src:/src:z
-      - ./data/repo:/var/repo:z
-      - ./etc/www.conf:/etc/php7/php-fpm.d/www.conf:z
-      - ./etc/local.json:/src/phabricator/conf/local/local.json:z
+      - ./data/mysql:/var/lib/mysql:z
+      - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf:z
     networks:
-      - phabricator
-    depends_on:
-      - aphlict
-  phd:
-    build:
-      context: php
-      args:
-        UID: ${UID}
-        GID: ${GID}
-    restart: always
-    volumes:
-      - ./src:/src:z
-      - ./data/repo:/var/repo:z
-      - ./etc/www.conf:/etc/php7/php-fpm.d/www.conf:z
-      - ./etc/local.json:/src/phabricator/conf/local/local.json:z
-    command: ["/usr/local/bin/phd"]
-    networks:
-      - phabricator
-    depends_on:
-      - aphlict
+      - net
+    ports:
+      - 3306:3306
   aphlict:
     build:
       context: php
@@ -46,19 +31,42 @@ services:
       - ./etc/aphlict.json:/etc/aphlict.json:z
     command: ["/usr/local/bin/aphlict"]
     networks:
-      - phabricator
-  mysql:
+      - net
+    depends_on:
+      - db
+  php:
     build:
-      context: mysql
+      context: php
       args:
         UID: ${UID}
         GID: ${GID}
     restart: always
     volumes:
-      - ./data/mysql:/var/lib/mysql:z
-      - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf:z
+      - ./src:/src:z
+      - ./data/repo:/var/repo:z
+      - ./etc/www.conf:/etc/php7/php-fpm.d/www.conf:z
+      - ./etc/local.json:/src/phabricator/conf/local/local.json:z
     networks:
-      - phabricator
+      - net
+    depends_on:
+      - aphlict
+  phd:
+    build:
+      context: php
+      args:
+        UID: ${UID}
+        GID: ${GID}
+        restart: always
+    volumes:
+      - ./src:/src:z
+      - ./data/repo:/var/repo:z
+      - ./etc/www.conf:/etc/php7/php-fpm.d/www.conf:z
+      - ./etc/local.json:/src/phabricator/conf/local/local.json:z
+    command: ["/usr/local/bin/phd"]
+    networks:
+      - net
+    depends_on:
+      - aphlict
   nginx:
     build: nginx
     restart: always
@@ -66,12 +74,12 @@ services:
       - ./etc/nginx.conf:/etc/nginx/conf.d/default.conf:z
       - ./src:/src:z
     networks:
-      - phabricator
+      - net
     ports:
-      - ${PORT}:8080
+      - ${PORT}:8081
     depends_on:
       - php
       - aphlict
 networks:
-  phabricator:
+  net:
     external: false

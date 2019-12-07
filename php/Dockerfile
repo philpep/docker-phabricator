@@ -33,7 +33,8 @@ RUN apk add --no-cache \
     php7-posix \
     php7-ldap \
     php7-fpm \
-    php7
+    php7 \
+    procps
 # test that pygmentize works
 RUN pygmentize -h
 # Install required dependencies for aphlict

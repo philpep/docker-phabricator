@@ -1,5 +1,7 @@
 #!/bin/sh
-f=/var/tmp/phd/log/daemons.log
+d=/var/tmp/phd/log
+f=daemons.log
 /src/phabricator/bin/phd start
-touch $f
-exec tail -F $f
+mkdir -p $d
+touch $d/$f
+exec tail -F $d/$f
